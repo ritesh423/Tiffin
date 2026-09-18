@@ -12,10 +12,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.ritesh.tiffin.presentation.KitchenListScreen
+import com.ritesh.tiffin.presentation.KitchenViewModel
 import com.ritesh.tiffin.ui.theme.TiffinTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,34 +36,19 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@Composable
-fun TiffinApp() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                text = "Tiffin",
-                style = MaterialTheme.typography.headlineLarge,
-            )
-            Text(
-                text = "Compose project is ready",
-                style = MaterialTheme.typography.bodyLarge,
-            )
-        }
-    }
-}
 
-@Preview(showBackground = true)
 @Composable
-private fun TiffinAppPreview() {
-    TiffinTheme {
-        TiffinApp()
-    }
+fun TiffinApp(
+    kitchenViewModel: KitchenViewModel = viewModel(),
+) {
+    val uiState by kitchenViewModel.uiState.collectAsStateWithLifecycle()
+
+    KitchenListScreen(
+        uiState = uiState,
+        onRetry = kitchenViewModel::loadKitchens,
+        onKitchenClick = { _ ->
+            // Navigation will be added in Step 4.
+        },
+    )
 }
 
