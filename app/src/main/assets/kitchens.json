@@ -1,0 +1,206 @@
+[
+  {
+    "id": 1,
+    "name": "Sharma Home Kitchen",
+    "cuisine": "North Indian",
+    "pricePerTiffin": 120,
+    "isVegetarian": true,
+    "rating": 4.7,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Rajma rice" },
+      { "day": "Tuesday", "dish": "Aloo gobi with roti" },
+      { "day": "Wednesday", "dish": "Kadhi chawal" },
+      { "day": "Thursday", "dish": "Chole with roti" },
+      { "day": "Friday", "dish": "Dal makhani and rice" },
+      { "day": "Saturday", "dish": "Paneer masala with roti" },
+      { "day": "Sunday", "dish": "Vegetable pulao and raita" }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Punjab Tiffin House",
+    "cuisine": "Punjabi",
+    "pricePerTiffin": 150,
+    "isVegetarian": false,
+    "rating": 4.6,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Butter chicken and rice" },
+      { "day": "Tuesday", "dish": "Dal tadka with roti" },
+      { "day": "Wednesday", "dish": "Chicken curry and rice" },
+      { "day": "Thursday", "dish": "Chole and jeera rice" },
+      { "day": "Friday", "dish": "Egg curry with roti" },
+      { "day": "Saturday", "dish": "Kadhai chicken and roti" },
+      { "day": "Sunday", "dish": "Chicken biryani" }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "South Bowl",
+    "cuisine": "South Indian",
+    "pricePerTiffin": 100,
+    "isVegetarian": true,
+    "rating": 4.5,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Idli, sambar and chutney" },
+      { "day": "Tuesday", "dish": "Lemon rice and curd" },
+      { "day": "Wednesday", "dish": "Masala dosa and sambar" },
+      { "day": "Thursday", "dish": "Vegetable uttapam" },
+      { "day": "Friday", "dish": "Tamarind rice and papad" },
+      { "day": "Saturday", "dish": "Vegetable upma" },
+      { "day": "Sunday", "dish": "Coconut rice and kurma" }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Bengali Bhoj",
+    "cuisine": "Bengali",
+    "pricePerTiffin": 160,
+    "isVegetarian": false,
+    "rating": 4.8,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Fish curry and rice" },
+      { "day": "Tuesday", "dish": "Aloo posto and dal" },
+      { "day": "Wednesday", "dish": "Chicken kosha and rice" },
+      { "day": "Thursday", "dish": "Khichuri and begun bhaja" },
+      { "day": "Friday", "dish": "Mustard fish and rice" },
+      { "day": "Saturday", "dish": "Egg curry and rice" },
+      { "day": "Sunday", "dish": "Mutton kosha and pulao" }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Gujarati Rasoi",
+    "cuisine": "Gujarati",
+    "pricePerTiffin": 110,
+    "isVegetarian": true,
+    "rating": 4.4,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Dal dhokli" },
+      { "day": "Tuesday", "dish": "Sev tameta and roti" },
+      { "day": "Wednesday", "dish": "Gujarati kadhi and rice" },
+      { "day": "Thursday", "dish": "Undhiyu and puri" },
+      { "day": "Friday", "dish": "Khichdi and kadhi" },
+      { "day": "Saturday", "dish": "Methi thepla and curd" },
+      { "day": "Sunday", "dish": "Gujarati thali" }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Mumbai Ghar Ka Khana",
+    "cuisine": "Maharashtrian",
+    "pricePerTiffin": 130,
+    "isVegetarian": true,
+    "rating": 4.3,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Matki usal and chapati" },
+      { "day": "Tuesday", "dish": "Pithla bhakri" },
+      { "day": "Wednesday", "dish": "Masale bhaat" },
+      { "day": "Thursday", "dish": "Bharli vangi and chapati" },
+      { "day": "Friday", "dish": "Varan bhaat" },
+      { "day": "Saturday", "dish": "Misal pav" },
+      { "day": "Sunday", "dish": "Puran poli" }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Kerala Home Table",
+    "cuisine": "Kerala",
+    "pricePerTiffin": 170,
+    "isVegetarian": false,
+    "rating": 4.7,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Fish curry and matta rice" },
+      { "day": "Tuesday", "dish": "Avial and rice" },
+      { "day": "Wednesday", "dish": "Chicken stew and appam" },
+      { "day": "Thursday", "dish": "Sambar and rice" },
+      { "day": "Friday", "dish": "Fish fry and rice" },
+      { "day": "Saturday", "dish": "Egg roast and appam" },
+      { "day": "Sunday", "dish": "Malabar chicken biryani" }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Delhi Dabba",
+    "cuisine": "Delhi",
+    "pricePerTiffin": 140,
+    "isVegetarian": false,
+    "rating": 4.2,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Chole chawal" },
+      { "day": "Tuesday", "dish": "Chicken curry and roti" },
+      { "day": "Wednesday", "dish": "Rajma chawal" },
+      { "day": "Thursday", "dish": "Egg masala and roti" },
+      { "day": "Friday", "dish": "Paneer butter masala" },
+      { "day": "Saturday", "dish": "Keema matar and roti" },
+      { "day": "Sunday", "dish": "Chicken biryani" }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Healthy Millet Kitchen",
+    "cuisine": "Healthy",
+    "pricePerTiffin": 180,
+    "isVegetarian": true,
+    "rating": 4.6,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Foxtail millet pulao" },
+      { "day": "Tuesday", "dish": "Ragi roti and vegetable curry" },
+      { "day": "Wednesday", "dish": "Millet khichdi" },
+      { "day": "Thursday", "dish": "Quinoa vegetable bowl" },
+      { "day": "Friday", "dish": "Jowar roti and dal" },
+      { "day": "Saturday", "dish": "Bajra pulao and raita" },
+      { "day": "Sunday", "dish": "Millet dosa and sambar" }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Lucknowi Kitchen",
+    "cuisine": "Awadhi",
+    "pricePerTiffin": 190,
+    "isVegetarian": false,
+    "rating": 4.8,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Awadhi chicken and rice" },
+      { "day": "Tuesday", "dish": "Dal and roomali roti" },
+      { "day": "Wednesday", "dish": "Chicken korma and naan" },
+      { "day": "Thursday", "dish": "Paneer korma and rice" },
+      { "day": "Friday", "dish": "Galouti kebab and paratha" },
+      { "day": "Saturday", "dish": "Nihari and kulcha" },
+      { "day": "Sunday", "dish": "Lucknowi biryani" }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Coastal Tiffins",
+    "cuisine": "Coastal",
+    "pricePerTiffin": 180,
+    "isVegetarian": false,
+    "rating": 4.5,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Fish curry and rice" },
+      { "day": "Tuesday", "dish": "Vegetable curry and neer dosa" },
+      { "day": "Wednesday", "dish": "Prawn masala and rice" },
+      { "day": "Thursday", "dish": "Chicken sukka and roti" },
+      { "day": "Friday", "dish": "Fish fry and lemon rice" },
+      { "day": "Saturday", "dish": "Egg curry and rice" },
+      { "day": "Sunday", "dish": "Prawn biryani" }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Jain Ghar Ka Khana",
+    "cuisine": "Jain",
+    "pricePerTiffin": 130,
+    "isVegetarian": true,
+    "rating": 4.4,
+    "weeklyMenu": [
+      { "day": "Monday", "dish": "Jain dal and rice" },
+      { "day": "Tuesday", "dish": "Raw banana curry and roti" },
+      { "day": "Wednesday", "dish": "Jain pav bhaji" },
+      { "day": "Thursday", "dish": "Bottle gourd kofta and roti" },
+      { "day": "Friday", "dish": "Jain pulao and raita" },
+      { "day": "Saturday", "dish": "Paneer curry without onion and garlic" },
+      { "day": "Sunday", "dish": "Jain thali" }
+    ]
+  }
+]
