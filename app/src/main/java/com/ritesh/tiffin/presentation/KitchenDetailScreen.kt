@@ -6,13 +6,16 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -34,21 +37,36 @@ fun KitchenDetailScreen(
             .fillMaxSize()
             .safeDrawingPadding(),
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 8.dp, vertical = 8.dp),
-            verticalAlignment = Alignment.CenterVertically,
+        Surface(
+            color = MaterialTheme.colorScheme.primaryContainer,
         ) {
-            TextButton(onClick = onBack) {
-                Text("Back")
-            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 12.dp,
+                        top = 8.dp,
+                        end = 20.dp,
+                        bottom = 20.dp,
+                    ),
+            ) {
+                TextButton(onClick = onBack) {
+                    Text("← Back")
+                }
 
-            Text(
-                text = kitchen.name,
-                style = MaterialTheme.typography.titleLarge,
-                modifier = Modifier.padding(start = 8.dp),
-            )
+                Text(
+                    text = "HOME KITCHEN",
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.padding(start = 8.dp),
+                )
+
+                Text(
+                    text = kitchen.name,
+                    style = MaterialTheme.typography.headlineMedium,
+                    modifier = Modifier.padding(start = 8.dp, top = 4.dp),
+                )
+            }
         }
 
         LazyColumn(
@@ -56,62 +74,131 @@ fun KitchenDetailScreen(
                 .fillMaxWidth()
                 .weight(1f),
             contentPadding = PaddingValues(
-                horizontal = 16.dp,
-                vertical = 8.dp,
+                horizontal = 20.dp,
+                vertical = 18.dp,
             ),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(14.dp),
         ) {
             item {
                 KitchenSummary(kitchen = kitchen)
             }
 
             item {
-                Text(
-                    text = "Weekly menu",
-                    style = MaterialTheme.typography.headlineSmall,
+                Column(
                     modifier = Modifier.padding(top = 8.dp),
-                )
+                    verticalArrangement = Arrangement.spacedBy(3.dp),
+                ) {
+                    Text(
+                        text = "Weekly menu",
+                        style = MaterialTheme.typography.headlineSmall,
+                    )
+
+                    Text(
+                        text = if (isPaid) {
+                            "Your home-cooked menu for the week."
+                        } else {
+                            "Available with Tiffin Plus."
+                        },
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
             }
 
-            items(
-                items = kitchen.weeklyMenu,
-                key = { menu -> menu.day },
-            ) { menu ->
-                Card(
-                    modifier = Modifier.fillMaxWidth(),
-                ) {
-                    Column(
-                        modifier = Modifier.padding(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(4.dp),
+            if (isPaid) {
+                items(
+                    items = kitchen.weeklyMenu,
+                    key = { menu -> menu.day },
+                ) { menu ->
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = MaterialTheme.shapes.medium,
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.surface,
+                        ),
+                        elevation = CardDefaults.cardElevation(
+                            defaultElevation = 1.dp,
+                        ),
                     ) {
-                        Text(
-                            text = menu.day,
-                            style = MaterialTheme.typography.titleMedium,
-                        )
+                        Row(
+                            modifier = Modifier.padding(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Text(
+                                text = menu.day,
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.primary,
+                                modifier = Modifier.weight(0.35f),
+                            )
 
-                        Text(
-                            text = menu.dish,
-                            style = MaterialTheme.typography.bodyLarge,
-                        )
+                            Text(
+                                text = menu.dish,
+                                style = MaterialTheme.typography.bodyLarge,
+                                modifier = Modifier.weight(0.65f),
+                            )
+                        }
+                    }
+                }
+            } else {
+                item {
+                    Card(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = MaterialTheme.shapes.large,
+                        colors = CardDefaults.cardColors(
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        ),
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            Text(
+                                text = "Plan your whole week",
+                                style = MaterialTheme.typography.titleLarge,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                            )
+
+                            Text(
+                                text = "Subscribe to view this kitchen's weekly menu.",
+                                style = MaterialTheme.typography.bodyLarge,
+                                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                            )
+                        }
                     }
                 }
             }
         }
 
-        Button(
-            onClick = onSubscribe,
-            enabled = !isPaid,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
+        Surface(
+            color = MaterialTheme.colorScheme.surface,
+            shadowElevation = 8.dp,
         ) {
-            Text(
-                text = if (isPaid) {
-                    "Subscribed"
-                } else {
-                    "Subscribe"
-                },
-            )
+            if (isPaid) {
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    shape = MaterialTheme.shapes.medium,
+                    color = MaterialTheme.colorScheme.secondaryContainer,
+                ) {
+                    Text(
+                        text = "Tiffin Plus is active",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        modifier = Modifier.padding(16.dp),
+                    )
+                }
+            } else {
+                Button(
+                    onClick = onSubscribe,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .heightIn(min = 52.dp),
+                ) {
+                    Text("Subscribe")
+                }
+            }
         }
     }
 }
@@ -122,34 +209,65 @@ private fun KitchenSummary(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
+        shape = MaterialTheme.shapes.large,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface,
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 2.dp,
+        ),
     ) {
         Column(
-            modifier = Modifier.padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             Text(
                 text = kitchen.cuisine,
                 style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
-            Text(
-                text = "₹${kitchen.pricePerTiffin} per tiffin",
-                style = MaterialTheme.typography.bodyLarge,
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                ) {
+                    Text(
+                        text = "₹${kitchen.pricePerTiffin}",
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.primary,
+                    )
 
-            Text(
-                text = if (kitchen.isVegetarian) {
-                    "Vegetarian"
-                } else {
-                    "Non-vegetarian"
-                },
-                style = MaterialTheme.typography.bodyLarge,
-            )
+                    Text(
+                        text = "per tiffin",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
 
-            Text(
-                text = "★ ${kitchen.rating}",
-                style = MaterialTheme.typography.bodyLarge,
-            )
+                Column(
+                    horizontalAlignment = Alignment.End,
+                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                ) {
+                    Text(
+                        text = "★ ${kitchen.rating}",
+                        style = MaterialTheme.typography.titleMedium,
+                    )
+
+                    Text(
+                        text = if (kitchen.isVegetarian) {
+                            "Vegetarian"
+                        } else {
+                            "Non-vegetarian"
+                        },
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
+            }
         }
     }
 }

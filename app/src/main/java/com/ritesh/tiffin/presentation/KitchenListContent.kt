@@ -17,11 +17,12 @@ fun KitchenListContent(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         contentPadding = androidx.compose.foundation.layout.PaddingValues(
-            start = 16.dp,
-            end = 16.dp,
-            bottom = 16.dp,
+            start = 20.dp,
+            top = 4.dp,
+            end = 20.dp,
+            bottom = 24.dp,
         ),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         items(
             items = kitchens,

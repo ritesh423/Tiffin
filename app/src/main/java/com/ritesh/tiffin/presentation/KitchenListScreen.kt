@@ -1,5 +1,6 @@
 package com.ritesh.tiffin.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,11 +28,32 @@ fun KitchenListScreen(
             .fillMaxSize()
             .safeDrawingPadding(),
     ) {
-        Text(
-            text = "Kitchens near you",
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.padding(16.dp),
-        )
+        Column(
+            modifier = Modifier.padding(
+                start = 20.dp,
+                top = 20.dp,
+                end = 20.dp,
+                bottom = 16.dp,
+            ),
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            Text(
+                text = "TIFFIN",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.primary,
+            )
+
+            Text(
+                text = "Kitchens near you",
+                style = MaterialTheme.typography.headlineMedium,
+            )
+
+            Text(
+                text = "Fresh, home-cooked meals made nearby.",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
 
         Box(
             modifier = Modifier
@@ -66,10 +88,18 @@ fun KitchenListScreen(
 
 @Composable
 private fun LoadingContent() {
-    Box(
+    Column(
         modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center,
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         CircularProgressIndicator()
+
+        Text(
+            text = "Finding kitchens near you…",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 16.dp),
+        )
     }
 }

@@ -4,11 +4,16 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -38,43 +43,96 @@ fun PaywallScreen(
         modifier = modifier
             .fillMaxSize()
             .safeDrawingPadding()
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .verticalScroll(rememberScrollState())
+            .padding(horizontal = 24.dp, vertical = 16.dp),
     ) {
+        TextButton(
+            onClick = onClose,
+            modifier = Modifier.align(Alignment.End),
+        ) {
+            Text("Not now")
+        }
+
+        Surface(
+            shape = MaterialTheme.shapes.small,
+            color = MaterialTheme.colorScheme.secondaryContainer,
+            modifier = Modifier.padding(top = 28.dp),
+        ) {
+            Text(
+                text = "TIFFIN PLUS",
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier.padding(
+                    horizontal = 12.dp,
+                    vertical = 7.dp,
+                ),
+            )
+        }
+
         Text(
-            text = "Tiffin Plus",
-            style = MaterialTheme.typography.headlineLarge,
+            text = "Know what's cooking all week",
+            style = MaterialTheme.typography.displaySmall,
+            modifier = Modifier.padding(top = 16.dp),
         )
 
         Text(
-            text = "Unlock weekly menus and delivery slots.",
+            text = "See weekly menus in advance and choose delivery slots that work for you.",
             style = MaterialTheme.typography.bodyLarge,
-            modifier = Modifier.padding(top = 8.dp),
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.padding(top = 10.dp),
         )
+
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 24.dp),
+            shape = MaterialTheme.shapes.medium,
+            color = MaterialTheme.colorScheme.secondaryContainer,
+        ) {
+            Column(
+                modifier = Modifier.padding(18.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Text(
+                    text = "• Full weekly menus",
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+
+                Text(
+                    text = "• Preferred delivery slots",
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
+        }
 
         Card(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 24.dp),
+            shape = MaterialTheme.shapes.large,
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer,
+            ),
         ) {
             Column(
                 modifier = Modifier.padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Text(
-                    text = "₹1 is charged now.",
-                    style = MaterialTheme.typography.titleLarge,
+                    text = "₹1 today",
+                    style = MaterialTheme.typography.headlineMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
 
                 Text(
-                    text = "Your ₹249/month plan starts on $planStartDate.",
+                    text = "₹1 will be charged now.",
                     style = MaterialTheme.typography.bodyLarge,
                 )
 
                 Text(
-                    text = "After that, you will be charged ₹249 each month.",
+                    text = "₹249 will be charged on $planStartDate, then every month.",
                     style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
             }
         }
@@ -83,16 +141,10 @@ fun PaywallScreen(
             onClick = onPurchase,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 24.dp),
+                .padding(top = 24.dp, bottom = 20.dp)
+                .heightIn(min = 54.dp),
         ) {
             Text("Start ₹1 trial")
-        }
-
-        TextButton(
-            onClick = onClose,
-            modifier = Modifier.padding(top = 8.dp),
-        ) {
-            Text("Not now")
         }
     }
 }
