@@ -21,6 +21,7 @@ import com.ritesh.tiffin.utils.KitchenListUiState
 fun KitchenDetailRoute(
     kitchenId: Int,
     uiState: KitchenListUiState,
+    isPaid: Boolean,
     onBack: () -> Unit,
     onSubscribe: () -> Unit,
 ) {
@@ -50,6 +51,7 @@ fun KitchenDetailRoute(
             } else {
                 KitchenDetailScreen(
                     kitchen = kitchen,
+                    isPaid = isPaid,
                     onBack = onBack,
                     onSubscribe = onSubscribe,
                 )

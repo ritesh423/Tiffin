@@ -15,6 +15,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,6 +31,7 @@ import com.ritesh.tiffin.navigation.Routes
 import com.ritesh.tiffin.presentation.KitchenDetailRoute
 import com.ritesh.tiffin.presentation.KitchenListScreen
 import com.ritesh.tiffin.presentation.KitchenViewModel
+import com.ritesh.tiffin.presentation.PaywallScreen
 import com.ritesh.tiffin.presentation.SubscriptionViewModel
 import com.ritesh.tiffin.ui.theme.TiffinTheme
 
@@ -58,17 +60,46 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TiffinApp(
     kitchenViewModel: KitchenViewModel = viewModel(),
+    subscriptionViewModel: SubscriptionViewModel = viewModel(),
 ) {
-    val uiState by kitchenViewModel.uiState.collectAsStateWithLifecycle()
+    val kitchenUiState by
+    kitchenViewModel.uiState.collectAsStateWithLifecycle()
+
+    val subscriptionUiState by
+    subscriptionViewModel.uiState.collectAsStateWithLifecycle()
+
     val navController = rememberNavController()
+
+    val startDestination = remember {
+        if (subscriptionUiState.shouldShowPaywall) {
+            Routes.PAYWALL
+        } else {
+            Routes.KITCHEN_LIST
+        }
+    }
+
+    fun leavePaywall() {
+        val returnedToPreviousScreen =
+            navController.popBackStack()
+
+        if (!returnedToPreviousScreen) {
+            navController.navigate(Routes.KITCHEN_LIST) {
+                popUpTo(Routes.PAYWALL) {
+                    inclusive = true
+                }
+
+                launchSingleTop = true
+            }
+        }
+    }
 
     NavHost(
         navController = navController,
-        startDestination = Routes.KITCHEN_LIST,
+        startDestination = startDestination,
     ) {
         composable(Routes.KITCHEN_LIST) {
             KitchenListScreen(
-                uiState = uiState,
+                uiState = kitchenUiState,
                 onRetry = kitchenViewModel::loadKitchens,
                 onKitchenClick = { kitchenId ->
                     navController.navigate(
@@ -92,12 +123,31 @@ fun TiffinApp(
 
             KitchenDetailRoute(
                 kitchenId = kitchenId,
-                uiState = uiState,
+                uiState = kitchenUiState,
+                isPaid = subscriptionUiState.isPaid,
                 onBack = {
                     navController.popBackStack()
                 },
                 onSubscribe = {
-                    // Paywall navigation will be added later.
+                    if (!subscriptionUiState.isPaid) {
+                        navController.navigate(Routes.PAYWALL)
+                    }
+                },
+            )
+        }
+
+        composable(Routes.PAYWALL) {
+            PaywallScreen(
+                onPurchase = {
+                    val purchaseSaved =
+                        subscriptionViewModel.completePurchase()
+
+                    if (purchaseSaved) {
+                        leavePaywall()
+                    }
+                },
+                onClose = {
+                    leavePaywall()
                 },
             )
         }

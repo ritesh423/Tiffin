@@ -25,6 +25,7 @@ import com.ritesh.tiffin.data.Kitchen
 fun KitchenDetailScreen(
     kitchen: Kitchen,
     onBack: () -> Unit,
+    isPaid: Boolean,
     onSubscribe: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -99,11 +100,18 @@ fun KitchenDetailScreen(
 
         Button(
             onClick = onSubscribe,
+            enabled = !isPaid,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
         ) {
-            Text("Subscribe")
+            Text(
+                text = if (isPaid) {
+                    "Subscribed"
+                } else {
+                    "Subscribe"
+                },
+            )
         }
     }
 }

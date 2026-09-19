@@ -12,4 +12,6 @@ object Routes {
     fun kitchenDetail(kitchenId: Int): String {
         return "kitchen_detail/$kitchenId"
     }
+
+    const val PAYWALL = "paywall"
 }
