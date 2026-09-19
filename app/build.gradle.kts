@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+
     val composeBom = platform("androidx.compose:compose-bom:2026.04.01")
 
     implementation("androidx.core:core-ktx:1.18.0")
@@ -54,6 +55,8 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.10.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.10.0")
+
+    implementation("androidx.navigation:navigation-compose:2.9.7")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
