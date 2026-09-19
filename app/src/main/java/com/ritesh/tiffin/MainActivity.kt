@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,11 +30,20 @@ import com.ritesh.tiffin.navigation.Routes
 import com.ritesh.tiffin.presentation.KitchenDetailRoute
 import com.ritesh.tiffin.presentation.KitchenListScreen
 import com.ritesh.tiffin.presentation.KitchenViewModel
+import com.ritesh.tiffin.presentation.SubscriptionViewModel
 import com.ritesh.tiffin.ui.theme.TiffinTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val subscriptionViewModel: SubscriptionViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        if (savedInstanceState == null) {
+            subscriptionViewModel.recordLaunch()
+        }
+
         enableEdgeToEdge()
 
         setContent {

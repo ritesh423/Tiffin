@@ -1,4 +1,4 @@
-package com.ritesh.tiffin.presentation
+package com.ritesh.tiffin.utils
 
 import com.ritesh.tiffin.data.Kitchen
 
