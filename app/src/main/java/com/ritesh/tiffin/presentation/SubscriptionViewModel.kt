@@ -5,6 +5,9 @@ import com.ritesh.tiffin.utils.SubscriptionUiState
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import com.ritesh.tiffin.analytics.Analytics
+import com.ritesh.tiffin.analytics.AnalyticsEvents
+import com.ritesh.tiffin.analytics.LogcatAnalytics
 import com.ritesh.tiffin.data.SubscriptionStorage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +18,7 @@ class SubscriptionViewModel(
 ) : AndroidViewModel(application) {
 
     private val storage = SubscriptionStorage(application)
+    private val analytics: Analytics = LogcatAnalytics()
 
     private val _uiState = MutableStateFlow(
         SubscriptionUiState(
@@ -32,6 +36,9 @@ class SubscriptionViewModel(
         _uiState.value = _uiState.value.copy(
             launchCount = updatedLaunchCount,
         )
+        if (_uiState.value.shouldShowPaywall) {
+            trackPaywallViewed()
+        }
     }
 
     fun completePurchase(): Boolean {
@@ -41,8 +48,18 @@ class SubscriptionViewModel(
             _uiState.value = _uiState.value.copy(
                 isPaid = true,
             )
+
+            analytics.log(
+                AnalyticsEvents.PURCHASE_COMPLETED,
+            )
         }
 
         return wasSaved
+    }
+
+    fun trackPaywallViewed() {
+        analytics.log(
+            AnalyticsEvents.PAYWALL_VIEWED,
+        )
     }
 }

@@ -47,6 +47,7 @@ android {
 
 dependencies {
 
+    implementation("com.google.mlkit:vision-internal-vkp:18.2.3")
     val composeBom = platform("androidx.compose:compose-bom:2026.04.01")
 
     implementation("androidx.core:core-ktx:1.18.0")

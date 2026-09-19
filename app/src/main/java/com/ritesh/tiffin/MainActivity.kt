@@ -102,6 +102,8 @@ fun TiffinApp(
                 uiState = kitchenUiState,
                 onRetry = kitchenViewModel::loadKitchens,
                 onKitchenClick = { kitchenId ->
+                    kitchenViewModel.trackKitchenDetailOpened()
+
                     navController.navigate(
                         Routes.kitchenDetail(kitchenId),
                     )
@@ -130,6 +132,7 @@ fun TiffinApp(
                 },
                 onSubscribe = {
                     if (!subscriptionUiState.isPaid) {
+                        subscriptionViewModel.trackPaywallViewed()
                         navController.navigate(Routes.PAYWALL)
                     }
                 },
